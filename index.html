@@ -31,7 +31,22 @@
 </style>
 </head>
 <body>
-<iframe src="https://ghalemabdelkader.alwaysdata.net/" title="Ghalem Store — متجر غالم لشحن الألعاب" allow="clipboard-read; clipboard-write"></iframe>
+<iframe id="storeFrame" src="https://ghalemabdelkader.alwaysdata.net/" title="Ghalem Store — متجر غالم لشحن الألعاب" allow="clipboard-read; clipboard-write"></iframe>
+<script>
+// Forward ?ref= (referral code) from the gateway URL into the store iframe
+(function () {
+  try {
+    var m = /[?&]ref=([^&]+)/.exec(location.search);
+    if (m && m[1]) {
+      var code = decodeURIComponent(m[1]).toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 12);
+      if (/^GH-[A-Z0-9]{6}$/.test(code)) {
+        document.getElementById('storeFrame').src =
+          'https://ghalemabdelkader.alwaysdata.net/#/home?ref=' + encodeURIComponent(code);
+      }
+    }
+  } catch (e) {}
+})();
+</script>
 <noscript>
 <h1>Ghalem Store — متجر غالم لشحن الألعاب بالدينار الجزائري</h1>
 <p>اشحن جواهر فري فاير، شدات ببجي موبايل، نقاط كول أوف ديوتي، جواهر موبايل ليجندز، عملات eFootball، روبوكس روبلوكس، V-Bucks فورتنايت، ونقاط فالورانت. الدفع عبر CCP و BaridiMob.</p>
