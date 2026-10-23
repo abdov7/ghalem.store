@@ -35,16 +35,23 @@
 <body>
 <iframe id="storeFrame" src="https://ghalemabdelkader.alwaysdata.net/" title="Ghalem Store — متجر غالم لشحن الألعاب" allow="clipboard-read; clipboard-write; microphone; autoplay"></iframe>
 <script>
-// Forward ?ref= (referral code) from the gateway URL into the store iframe
+// Forward ?ref= (referral code) and ?splash=1 (force intro) from the gateway URL into the store iframe
 (function () {
   try {
     var m = /[?&]ref=([^&]+)/.exec(location.search);
+    var splash = /[?&]splash=1/.test(location.search);
+    var extra = splash ? '?splash=1' : '';
     if (m && m[1]) {
       var code = decodeURIComponent(m[1]).toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 12);
       if (/^GH-[A-Z0-9]{6}$/.test(code)) {
         document.getElementById('storeFrame').src =
-          'https://ghalemabdelkader.alwaysdata.net/#/home?ref=' + encodeURIComponent(code);
+          'https://ghalemabdelkader.alwaysdata.net/#/home?ref=' + encodeURIComponent(code) + (splash ? '&splash=1' : '');
+        return;
       }
+    }
+    if (splash) {
+      document.getElementById('storeFrame').src =
+        'https://ghalemabdelkader.alwaysdata.net/?splash=1';
     }
   } catch (e) {}
 })();
